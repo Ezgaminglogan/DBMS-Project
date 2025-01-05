@@ -126,84 +126,84 @@ Public Class TeacherDashboard
     Private Sub btnTimeOut_Click(sender As Object, e As EventArgs) Handles btnTimeOut.Click
         Dim connectionString As String = "Server=localhost;Database=new_activitydms;Uid=root;Pwd=;"
         Using connection As New MySqlConnection(connectionString)
-            Try
-                connection.Open()
+            connection.Open()
 
-                ' Check if already timed out
-                Dim checkTimeOutQuery As String = "SELECT Time_Out FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NOT NULL"
-                Using checkCommand As New MySqlCommand(checkTimeOutQuery, connection)
-                    checkCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                    If checkCommand.ExecuteScalar() IsNot Nothing Then
-                        MessageBox.Show("You have already timed out today.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
-                    End If
-                End Using
+            ' Check if already timed out
+            Dim checkTimeOutQuery As String = "SELECT Time_Out FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NOT NULL"
+            Using checkCommand As New MySqlCommand(checkTimeOutQuery, connection)
+                checkCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                If checkCommand.ExecuteScalar() IsNot Nothing Then
+                    MessageBox.Show("You have already timed out today.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End Using
 
-                ' Check if timed in for today
-                Dim checkTimeInQuery As String = "SELECT log_id, Time_In FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NULL"
-                Using checkTimeInCommand As New MySqlCommand(checkTimeInQuery, connection)
-                    checkTimeInCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                    Dim logId As Object = checkTimeInCommand.ExecuteScalar()
-                    If logId Is Nothing Then
+            ' Check if timed in for today and retrieve Time_In
+            Dim checkTimeInQuery As String = "SELECT log_id, Time_In FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NULL"
+            Using checkTimeInCommand As New MySqlCommand(checkTimeInQuery, connection)
+                checkTimeInCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                Using reader As MySqlDataReader = checkTimeInCommand.ExecuteReader()
+                    If reader.Read() Then
+                        ' Retrieve log_id and Time_In
+                        Dim logId As Integer = reader.GetInt32(reader.GetOrdinal("log_id"))
+                        Dim timeIn As DateTime = reader.GetDateTime(reader.GetOrdinal("Time_In"))
+                        reader.Close()
+                        ' Get the Qualifications from the users table to determine the hourly rate
+                        Dim getQualificationsQuery As String = "SELECT Qualifications FROM users WHERE UserID = @UserID"
+                        Dim qualifications As String = String.Empty
+                        Using qualificationsCommand As New MySqlCommand(getQualificationsQuery, connection)
+                            qualificationsCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                            qualifications = qualificationsCommand.ExecuteScalar()?.ToString()
+                        End Using
+
+                        ' Set the hourly rate based on the qualifications
+                        Dim hourlyRate As Integer
+                        Select Case qualifications
+                            Case "Part Timer"
+                                hourlyRate = 200
+                            Case "Masteral"
+                                hourlyRate = 400
+                            Case "PhD"
+                                hourlyRate = 600
+                            Case "Doctorate"
+                                hourlyRate = 800
+                            Case Else
+                                hourlyRate = 0 ' Handle unexpected or missing qualifications
+                        End Select
+
+                        ' Calculate Hours Worked
+                        Dim hoursWorked As Decimal = Math.Round(DateTime.Now.Subtract(timeIn).TotalHours, 2)
+
+                        ' Calculate Total Salary
+                        Dim totalSalary As Decimal = Math.Round(hoursWorked * hourlyRate, 2)
+
+                        ' Record the time out and update the hours and salary
+                        Dim updateQuery As String = "
+                        UPDATE teacherlogs 
+                        SET Time_Out = NOW(), 
+                            Hours = @Hours, 
+                            Salary = @Salary 
+                        WHERE log_id = @LogID"
+                        Using updateCommand As New MySqlCommand(updateQuery, connection)
+                            updateCommand.Parameters.AddWithValue("@LogID", logId)
+                            updateCommand.Parameters.AddWithValue("@Hours", hoursWorked)
+                            updateCommand.Parameters.AddWithValue("@Salary", totalSalary)
+                            updateCommand.ExecuteNonQuery()
+
+                            MessageBox.Show("Time Out recorded successfully. Salary calculated and updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End Using
+                    Else
                         MessageBox.Show("You need to time in before you can time out.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
                     End If
-
-                    ' Get Time_In for calculation
-                    Dim timeIn As DateTime = Convert.ToDateTime(checkTimeInCommand.ExecuteScalar())
-
-                    ' Get the Qualifications from the users table to determine the hourly rate
-                    Dim getQualificationsQuery As String = "SELECT Qualifications FROM users WHERE UserID = @UserID"
-                    Dim qualifications As String = String.Empty
-                    Using qualificationsCommand As New MySqlCommand(getQualificationsQuery, connection)
-                        qualificationsCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                        qualifications = qualificationsCommand.ExecuteScalar()?.ToString()
-                    End Using
-
-                    ' Set the hourly rate based on the qualifications
-                    Dim hourlyRate As Integer = 0
-                    Select Case qualifications
-                        Case "Part Timer"
-                            hourlyRate = 200
-                        Case "Masteral"
-                            hourlyRate = 400
-                        Case "PhD"
-                            hourlyRate = 600
-                        Case "Doctorate"
-                            hourlyRate = 800
-                    End Select
-
-                    ' Calculate Hours Worked
-                    Dim hoursWorked As Integer = Convert.ToInt32(DateTime.Now.Subtract(timeIn).TotalHours)
-
-                    ' Calculate Total Salary
-                    Dim totalSalary As Decimal = hoursWorked * hourlyRate
-
-                    ' Record the time out and update the hours and salary
-                    Dim updateQuery As String = "
-                    UPDATE teacherlogs 
-                    SET Time_Out = NOW(), 
-                        Hours = @Hours, 
-                        Salary = @Salary 
-                    WHERE log_id = @LogID"
-                    Using updateCommand As New MySqlCommand(updateQuery, connection)
-                        updateCommand.Parameters.AddWithValue("@LogID", logId)
-                        updateCommand.Parameters.AddWithValue("@Hours", hoursWorked)
-                        updateCommand.Parameters.AddWithValue("@Salary", totalSalary)
-                        updateCommand.ExecuteNonQuery()
-
-                        MessageBox.Show("Time Out recorded successfully. Salary calculated and updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    End Using
                 End Using
-            Catch ex As Exception
-                MessageBox.Show("Error: " & ex.Message)
-            End Try
+            End Using
         End Using
 
+        ' Reload data
         LoadDailyLogs()
         LoadSalarySubject()
-
     End Sub
+
 
 
     Private Sub LoadDailyLogs()
