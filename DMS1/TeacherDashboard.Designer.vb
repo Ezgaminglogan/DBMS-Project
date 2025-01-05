@@ -22,8 +22,10 @@ Partial Class TeacherDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TeacherDashboard))
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -62,12 +64,13 @@ Partial Class TeacherDashboard
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.dgSalarySubject)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox2.Font = New System.Drawing.Font("Malgun Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.GroupBox2.Location = New System.Drawing.Point(589, 170)
+        Me.GroupBox2.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!)
+        Me.GroupBox2.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 363)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(491, 366)
+        Me.GroupBox2.Size = New System.Drawing.Size(1183, 366)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Salary Subject"
@@ -76,33 +79,36 @@ Partial Class TeacherDashboard
         '
         Me.dgSalarySubject.AllowUserToAddRows = False
         Me.dgSalarySubject.AllowUserToDeleteRows = False
+        Me.dgSalarySubject.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgSalarySubject.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgSalarySubject.BackgroundColor = System.Drawing.Color.White
         Me.dgSalarySubject.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Malgun Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgSalarySubject.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgSalarySubject.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.dgSalarySubject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgSalarySubject.Location = New System.Drawing.Point(6, 24)
         Me.dgSalarySubject.Name = "dgSalarySubject"
         Me.dgSalarySubject.ReadOnly = True
-        Me.dgSalarySubject.Size = New System.Drawing.Size(479, 336)
+        Me.dgSalarySubject.Size = New System.Drawing.Size(1171, 336)
         Me.dgSalarySubject.TabIndex = 0
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.dgHourlyData)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Font = New System.Drawing.Font("Malgun Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1.Location = New System.Drawing.Point(92, 170)
+        Me.GroupBox1.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(491, 366)
+        Me.GroupBox1.Size = New System.Drawing.Size(1183, 366)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Hourly Data"
@@ -111,22 +117,41 @@ Partial Class TeacherDashboard
         '
         Me.dgHourlyData.AllowUserToAddRows = False
         Me.dgHourlyData.AllowUserToDeleteRows = False
+        Me.dgHourlyData.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgHourlyData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgHourlyData.BackgroundColor = System.Drawing.Color.White
         Me.dgHourlyData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Malgun Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgHourlyData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgHourlyData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgHourlyData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Malgun Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgHourlyData.DefaultCellStyle = DataGridViewCellStyle10
+        Me.dgHourlyData.GridColor = System.Drawing.Color.CadetBlue
         Me.dgHourlyData.Location = New System.Drawing.Point(6, 24)
         Me.dgHourlyData.Name = "dgHourlyData"
         Me.dgHourlyData.ReadOnly = True
-        Me.dgHourlyData.Size = New System.Drawing.Size(479, 336)
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgHourlyData.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
+        Me.dgHourlyData.Size = New System.Drawing.Size(1171, 336)
         Me.dgHourlyData.TabIndex = 0
         '
         'Panel1
@@ -223,6 +248,7 @@ Partial Class TeacherDashboard
         'btnTimeIn
         '
         Me.btnTimeIn.BackColor = System.Drawing.Color.Green
+        Me.btnTimeIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnTimeIn.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnTimeIn.FlatAppearance.BorderSize = 0
         Me.btnTimeIn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
@@ -230,6 +256,7 @@ Partial Class TeacherDashboard
         Me.btnTimeIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTimeIn.Font = New System.Drawing.Font("Bahnschrift SemiLight Condensed", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTimeIn.ForeColor = System.Drawing.Color.White
+        Me.btnTimeIn.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.btnTimeIn.Location = New System.Drawing.Point(3, 569)
         Me.btnTimeIn.Name = "btnTimeIn"
         Me.btnTimeIn.Size = New System.Drawing.Size(160, 46)

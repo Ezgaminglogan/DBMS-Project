@@ -36,7 +36,7 @@ Public Class frmViewSchedule
 
     ' Load the schedule for the logged-in user (either teacher or student) into the DataGridView
     Private Sub LoadSchedule()
-        Dim query As String = "SELECT ScheduleID, TeacherID, CourseNumber, DayOfWeek, Time, RoomNumber FROM schedule WHERE TeacherID = @UserID"
+        Dim query As String = "SELECT ScheduleID, TeacherID, CourseNumber, DayOfWeek, Time, RoomNumber , Section FROM schedule WHERE TeacherID = @UserID"
 
         Using connection As New MySqlConnection("Server=localhost;Database=new_activitydms;Uid=root;Pwd=;")
             Using command As New MySqlCommand(query, connection)
@@ -56,6 +56,7 @@ Public Class frmViewSchedule
                             DataGridView1.Columns.Add("DayOfWeek", "Day Of Week")
                             DataGridView1.Columns.Add("Time", "Time")
                             DataGridView1.Columns.Add("RoomNumber", "Room Number")
+                            DataGridView1.Columns.Add("Section", "Section ID")
                         End If
 
                         ' Check if the DataTable has rows
@@ -85,9 +86,9 @@ Public Class frmViewSchedule
             Dim dayOfWeek As String = row("DayOfWeek").ToString()
             Dim time As String = row("Time").ToString()
             Dim roomNumber As String = If(row("RoomNumber") IsNot DBNull.Value, row("RoomNumber").ToString(), String.Empty)
-
+            Dim Section As String = If(row("Section") IsNot DBNull.Value, row("Section").ToString(), String.Empty)
             ' Add a new row to the DataGridView
-            DataGridView1.Rows.Add(scheduleID, userID, courseNumber, dayOfWeek, time, roomNumber)
+            DataGridView1.Rows.Add(scheduleID, userID, courseNumber, dayOfWeek, time, roomNumber, Section)
         Next
     End Sub
 
@@ -110,4 +111,5 @@ Public Class frmViewSchedule
     Private Sub btnClose_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
+
 End Class

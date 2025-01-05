@@ -42,6 +42,7 @@ Public Class TeacherDashboard
 
     ' Event handler for Logout button click
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        CurrentUserID = 0 ' Reset the current user ID
         frmLogin1.Show() ' Show the login form
         Me.Hide() ' Hide the current dashboard form
     End Sub
@@ -50,11 +51,6 @@ Public Class TeacherDashboard
     Private Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
         Dim viewScheduleForm As New frmViewSchedule(CurrentUserID) ' Pass the UserID to view schedule
         switchPanel(viewScheduleForm) ' Call your method to switch panels
-    End Sub
-
-    ' Event handler for Room Management button click
-    Private Sub btnRoom_Click(sender As Object, e As EventArgs)
-        switchPanel(New frmManageRoomSchedule()) ' Assuming frmManageRoomSchedule does not require a teacher ID
     End Sub
 
     ' Method to switch between forms dynamically inside Panel2
@@ -121,8 +117,10 @@ Public Class TeacherDashboard
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
-
         End Using
+        LoadDailyLogs()
+        LoadSalarySubject()
+
     End Sub
 
     Private Sub btnTimeOut_Click(sender As Object, e As EventArgs) Handles btnTimeOut.Click
@@ -201,6 +199,10 @@ Public Class TeacherDashboard
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End Using
+
+        LoadDailyLogs()
+        LoadSalarySubject()
+
     End Sub
 
 

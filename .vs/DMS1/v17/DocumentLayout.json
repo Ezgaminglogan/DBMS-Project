@@ -1,32 +1,28 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\",
+  "WorkspaceRootPath": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\admin\\frmadminmtsalary.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\admin\\frmadminmtsalary.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dbms-project\\dms1\\teacherdashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\teacherdashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\frmadmin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\frmadmin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dbms-project\\dms1\\frmviewschedule.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\frmviewschedule.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\frmadmin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\frmadmin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dbms-project\\dms1\\frmviewschedule.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\frmviewschedule.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\admin\\frmadminmtsalary.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\admin\\frmadminmtsalary.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\teacherdashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\dms1\\teacherdashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|solutionrelative:dms1\\teacherdashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|DMS1||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dms1\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|8998e48e-b89a-4034-b66e-353d8c1fdc2e"
+      "AbsoluteMoniker": "D:0:0:{70900180-0E8A-4084-BD8D-B8F233A2E8B4}|DMS1\\DMS1.vbproj|c:\\users\\logan\\desktop\\dms(checking)\\dbms-project\\dms1\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|8998e48e-b89a-4034-b66e-353d8c1fdc2e"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,16 +36,28 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "DMS1",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\DMS1.vbproj",
+              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\DMS1.vbproj",
               "RelativeDocumentMoniker": "DMS1\\DMS1.vbproj",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\DMS1.vbproj",
-              "RelativeToolTip": "DMS1\\DMS1.vbproj",
+              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\DMS1.vbproj*",
+              "RelativeToolTip": "DMS1\\DMS1.vbproj*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-11-25T05:00:50.401Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmViewSchedule.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\frmViewSchedule.vb",
+              "RelativeDocumentMoniker": "DMS1\\frmViewSchedule.vb",
+              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\frmViewSchedule.vb [Design]*",
+              "RelativeToolTip": "DMS1\\frmViewSchedule.vb [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-01-05T06:54:13.382Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Bookmark",
@@ -61,63 +69,38 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmAdmin.vb",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\frmAdmin.vb",
-              "RelativeDocumentMoniker": "DMS1\\frmAdmin.vb",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\frmAdmin.vb",
-              "RelativeToolTip": "DMS1\\frmAdmin.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAywBcAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-01-04T16:40:04.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmAdmin.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\frmAdmin.vb",
-              "RelativeDocumentMoniker": "DMS1\\frmAdmin.vb",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\frmAdmin.vb [Design]",
-              "RelativeToolTip": "DMS1\\frmAdmin.vb [Design]",
+              "Title": "frmViewSchedule.vb",
+              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\frmViewSchedule.vb",
+              "RelativeDocumentMoniker": "DMS1\\frmViewSchedule.vb",
+              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\frmViewSchedule.vb*",
+              "RelativeToolTip": "DMS1\\frmViewSchedule.vb*",
+              "ViewState": "AgIAAF8AAAAAAAAAAAA2wHEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-01-04T16:40:03.484Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-05T06:29:01.89Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "frmAdminMTSalary.vb",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\Admin\\frmAdminMTSalary.vb",
-              "RelativeDocumentMoniker": "DMS1\\Admin\\frmAdminMTSalary.vb",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\Admin\\frmAdminMTSalary.vb",
-              "RelativeToolTip": "DMS1\\Admin\\frmAdminMTSalary.vb",
-              "ViewState": "AgIAAAIAAAAAAAAAAADwvxIAAAA5AAAAAAAAAA==",
+              "Title": "TeacherDashboard.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\TeacherDashboard.vb",
+              "RelativeDocumentMoniker": "DMS1\\TeacherDashboard.vb",
+              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\TeacherDashboard.vb [Design]",
+              "RelativeToolTip": "DMS1\\TeacherDashboard.vb [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-01-04T15:48:33.602Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmAdminMTSalary.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\Admin\\frmAdminMTSalary.vb",
-              "RelativeDocumentMoniker": "DMS1\\Admin\\frmAdminMTSalary.vb",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\Admin\\frmAdminMTSalary.vb [Design]",
-              "RelativeToolTip": "DMS1\\Admin\\frmAdminMTSalary.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-01-04T15:39:46.834Z",
+              "WhenOpened": "2025-01-05T06:05:43.005Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "TeacherDashboard.vb",
-              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\TeacherDashboard.vb",
+              "DocumentMoniker": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\TeacherDashboard.vb",
               "RelativeDocumentMoniker": "DMS1\\TeacherDashboard.vb",
-              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DMS1\\TeacherDashboard.vb",
+              "ToolTip": "C:\\Users\\Logan\\Desktop\\DMS(CHECKING)\\DBMS-Project\\DMS1\\TeacherDashboard.vb",
               "RelativeToolTip": "DMS1\\TeacherDashboard.vb",
-              "ViewState": "AgIAACkBAAAAAAAAAAAgwEMBAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAqwMcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2025-01-04T14:22:51.133Z",
               "EditorCaption": ""

@@ -137,12 +137,15 @@ Partial Class frmManageTeacher
         '
         'dgvTeachers
         '
+        Me.dgvTeachers.AllowUserToAddRows = False
+        Me.dgvTeachers.AllowUserToDeleteRows = False
         Me.dgvTeachers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTeachers.BackgroundColor = System.Drawing.Color.Gray
         Me.dgvTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTeachers.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvTeachers.Location = New System.Drawing.Point(0, 313)
         Me.dgvTeachers.Name = "dgvTeachers"
+        Me.dgvTeachers.ReadOnly = True
         Me.dgvTeachers.Size = New System.Drawing.Size(1167, 377)
         Me.dgvTeachers.TabIndex = 12
         '
@@ -238,6 +241,8 @@ Partial Class frmManageTeacher
         '
         'cbQual
         '
+        Me.cbQual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbQual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbQual.Font = New System.Drawing.Font("Franklin Gothic Medium", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbQual.FormattingEnabled = True
         Me.cbQual.Items.AddRange(New Object() {"Part Timer", "Masteral", "PhD", "Doctorate"})
@@ -245,7 +250,6 @@ Partial Class frmManageTeacher
         Me.cbQual.Name = "cbQual"
         Me.cbQual.Size = New System.Drawing.Size(150, 29)
         Me.cbQual.TabIndex = 29
-        Me.cbQual.Text = "-- SELECT --"
         '
         'frmManageTeacher
         '

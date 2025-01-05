@@ -37,6 +37,11 @@ DMS1
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:DMS1.My.Resources.Resources.logout">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:DMS1.My.Resources.Resources.teacher_11256757">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
