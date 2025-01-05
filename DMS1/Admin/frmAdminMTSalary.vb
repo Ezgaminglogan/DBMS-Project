@@ -81,6 +81,7 @@ Public Class frmAdminMTSalary
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
             If reader.Read() Then
                 Dim teacherID = reader("teacher_ID").ToString()
+                reader.Close()
                 ' Delete the teacher logs first
                 Dim deleteQuery As String = "DELETE FROM teacherlogs WHERE teacher_ID = @teacherID"
                 Using deleteCmd As New MySqlCommand(deleteQuery, conn)
@@ -138,7 +139,12 @@ Public Class frmAdminMTSalary
             If reader.Read() Then
                 Dim teacherName = reader("FirstName") & " " & reader("LastName")
                 Dim totalHours = reader("TotalHours").ToString()
-                Dim totalSalary = reader("TotalSalary").ToString("C")
+                Dim totalSalary As String
+                If IsDBNull(reader("TotalSalary")) Then
+                    totalSalary = "0"
+                Else
+                    totalSalary = Convert.ToDecimal(reader("TotalSalary")).ToString("C")
+                End If
                 dt.Rows.Add(teacherName, totalHours, totalSalary)
             End If
             dgTeachers.DataSource = dt

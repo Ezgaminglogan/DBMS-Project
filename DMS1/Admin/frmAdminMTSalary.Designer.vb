@@ -22,7 +22,7 @@ Partial Class frmAdminMTSalary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblAVG = New System.Windows.Forms.Label()
@@ -37,6 +37,7 @@ Partial Class frmAdminMTSalary
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.dgTeachers = New System.Windows.Forms.DataGridView()
         Me.cbTable = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -172,14 +173,14 @@ Partial Class frmAdminMTSalary
         Me.dgTeachers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgTeachers.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgTeachers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgTeachers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgTeachers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgTeachers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgTeachers.Location = New System.Drawing.Point(0, 0)
@@ -196,10 +197,20 @@ Partial Class frmAdminMTSalary
         Me.cbTable.Font = New System.Drawing.Font("Lucida Sans", 11.25!)
         Me.cbTable.FormattingEnabled = True
         Me.cbTable.Items.AddRange(New Object() {"Clear Table", "Get Teachers By Date", "Teacher Work Hours", "Most Hours Worked", "Delete Teacher with Lowest Salary"})
-        Me.cbTable.Location = New System.Drawing.Point(994, 132)
+        Me.cbTable.Location = New System.Drawing.Point(836, 132)
         Me.cbTable.Name = "cbTable"
-        Me.cbTable.Size = New System.Drawing.Size(164, 25)
+        Me.cbTable.Size = New System.Drawing.Size(322, 25)
         Me.cbTable.TabIndex = 2
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Lucida Sans", 11.25!)
+        Me.Label4.Location = New System.Drawing.Point(937, 112)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(127, 17)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "SELECT A TABLE"
         '
         'frmAdminMTSalary
         '
@@ -211,6 +222,7 @@ Partial Class frmAdminMTSalary
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Label4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmAdminMTSalary"
         Me.Text = "frmAdminMTSalary"
@@ -223,6 +235,7 @@ Partial Class frmAdminMTSalary
         Me.Panel3.ResumeLayout(False)
         CType(Me.dgTeachers, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -240,4 +253,5 @@ Partial Class frmAdminMTSalary
     Friend WithEvents Panel3 As Panel
     Friend WithEvents dgTeachers As DataGridView
     Friend WithEvents cbTable As ComboBox
+    Friend WithEvents Label4 As Label
 End Class
