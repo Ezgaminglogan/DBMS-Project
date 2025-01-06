@@ -34,7 +34,7 @@ Public Class frmAdminMTSalary
                 LoadTeacherByDate(dtpTeachers)
             Case "Teacher Work Hours"
                 LoadTeacherWorkHours(tbTeacherID)
-            Case "Most Hours Worked"
+            Case "Most Teacher Hours Worked"
                 LoadMostWorkedTeacher()
             Case "Delete Teacher with Lowest Salary"
                 DeleteTeacherWithLowestSalary()

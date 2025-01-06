@@ -22,7 +22,7 @@ Partial Class frmAdminMTSalary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblAVG = New System.Windows.Forms.Label()
@@ -173,14 +173,14 @@ Partial Class frmAdminMTSalary
         Me.dgTeachers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgTeachers.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgTeachers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgTeachers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgTeachers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgTeachers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgTeachers.Location = New System.Drawing.Point(0, 0)
@@ -196,7 +196,7 @@ Partial Class frmAdminMTSalary
         Me.cbTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbTable.Font = New System.Drawing.Font("Lucida Sans", 11.25!)
         Me.cbTable.FormattingEnabled = True
-        Me.cbTable.Items.AddRange(New Object() {"Clear Table", "Get Teachers By Date", "Teacher Work Hours", "Most Hours Worked", "Delete Teacher with Lowest Salary"})
+        Me.cbTable.Items.AddRange(New Object() {"Clear Table", "Get Teachers By Date", "Teacher Work Hours", "Most Teacher Hours Worked", "Delete Teacher with Lowest Salary"})
         Me.cbTable.Location = New System.Drawing.Point(836, 132)
         Me.cbTable.Name = "cbTable"
         Me.cbTable.Size = New System.Drawing.Size(322, 25)
