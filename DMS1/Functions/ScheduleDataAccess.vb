@@ -7,6 +7,7 @@ Public Class ScheduleDataAccess
         ' Check for conflicts before adding the schedule
         If CheckScheduleConflict(dayOfWeek, timeSlot, roomNumber, section, courseNumber) Then
             MessageBox.Show("Conflict: A schedule already exists for this day, time, room, and section.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+            Return
         End If
 
         ' Proceed to add schedule if no conflict is found
@@ -61,10 +62,12 @@ Public Class ScheduleDataAccess
 
 
 
-    ' Check for conflicts based on Day, Time, and Room
+    ' Check for conflicts based on Day, Time, Room, Section, or Course
     Public Function CheckScheduleConflict(day As String, timeSlot As String, roomNumber As String, section As String, courseNumber As String) As Boolean
         Using connection As New MySqlConnection(dbConnectionString)
-            Dim query As String = "SELECT COUNT(*) FROM schedule WHERE DayOfWeek = @dayOfWeek AND Time = @timeSlot AND RoomNumber = @roomNumber AND Section = @section AND CourseNumber = @courseNumber"
+            Dim query As String = "SELECT COUNT(*) FROM schedule WHERE (DayOfWeek = @dayOfWeek AND Time = @timeSlot AND RoomNumber = @roomNumber) " &
+                                  "OR (DayOfWeek = @dayOfWeek AND Time = @timeSlot AND Section = @section) " &
+                                  "OR (DayOfWeek = @dayOfWeek AND Time = @timeSlot AND CourseNumber = @courseNumber)"
             Using command As New MySqlCommand(query, connection)
                 command.Parameters.AddWithValue("@dayOfWeek", day)
                 command.Parameters.AddWithValue("@timeSlot", timeSlot)
@@ -78,6 +81,7 @@ Public Class ScheduleDataAccess
             End Using
         End Using
     End Function
+
 
 
 End Class

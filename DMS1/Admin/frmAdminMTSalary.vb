@@ -104,12 +104,13 @@ Public Class frmAdminMTSalary
 
     ' Function to list all teachers who worked on a specific date
     Public Sub LoadTeacherByDate(ByVal dtpTeachers As DateTimePicker)
-        Dim query As String = "SELECT u.FirstName, u.LastName, t.Hours, t.Time_In, t.Time_Out FROM teacherlogs t JOIN users u ON t.teacher_ID = u.UserID WHERE DATE(t.Time_In) = @selectedDate"
+        Dim query As String = "SELECT u.UserID , u.FirstName, u.LastName, t.Hours, t.Time_In, t.Time_Out FROM teacherlogs t JOIN users u ON t.teacher_ID = u.UserID WHERE DATE(t.Time_In) = @selectedDate"
         Using cmd As New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@selectedDate", dtpTeachers.Value.Date)
             conn.Open()
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
             Dim dt As New DataTable()
+            dt.Columns.Add("Teacher ID")
             dt.Columns.Add("First Name")
             dt.Columns.Add("Last Name")
             dt.Columns.Add("Hours Worked")
@@ -117,7 +118,7 @@ Public Class frmAdminMTSalary
             dt.Columns.Add("Time Out")
 
             While reader.Read()
-                dt.Rows.Add(reader("FirstName"), reader("LastName"), reader("Hours"), reader("Time_In"), reader("Time_Out"))
+                dt.Rows.Add(reader("UserID"), reader("FirstName"), reader("LastName"), reader("Hours"), reader("Time_In"), reader("Time_Out"))
             End While
             dgTeachers.DataSource = dt
             conn.Close()
@@ -129,7 +130,6 @@ Public Class frmAdminMTSalary
         Dim query As String = "SELECT u.FirstName, u.LastName, SUM(t.Hours) AS TotalHours, SUM(t.Salary) AS TotalSalary FROM teacherlogs t JOIN users u ON t.teacher_ID = u.UserID WHERE t.teacher_ID = @teacherID GROUP BY t.teacher_ID"
         Using cmd As New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@teacherID", tbTeacherID.Text)
-            conn.Open()
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
             Dim dt As New DataTable()
             dt.Columns.Add("Teacher Name")

@@ -8,14 +8,15 @@ Public Class EnrollmentDataAccess
     ' Check if the user can enroll in the specified course
     Public Function IsValidEnrollment(userID As Integer, courseNumber As String) As Boolean
         Using connection As New MySqlConnection(connectionString)
-            ' Query to check if the student has failed any prerequisites for the specified course
+            ' Query to check if the user has failed the specified course or its prerequisites
             Dim query As String = "
-            SELECT COUNT(*) 
-            FROM prerequisite p
-            JOIN gradereport gr ON p.PrerequisiteCourse_number = gr.CourseNumber
-            WHERE gr.UserID = @UserID 
+        SELECT COUNT(*) 
+        FROM prerequisite p
+        LEFT JOIN gradereport gr ON p.PrerequisiteCourse_number = gr.CourseNumber
+        WHERE 
+            gr.UserID = @UserID 
             AND gr.Grade = 'F' 
-            AND p.Course_number = @CourseNumber"
+            AND (p.Course_number = @CourseNumber OR p.PrerequisiteCourse_number = @CourseNumber)"
 
             Dim command As New MySqlCommand(query, connection)
             command.Parameters.AddWithValue("@UserID", userID)
@@ -23,9 +24,10 @@ Public Class EnrollmentDataAccess
 
             connection.Open()
             Dim count As Integer = Convert.ToInt32(command.ExecuteScalar())
-            Return count = 0 ' Return true if there are no failed prerequisites
+            Return count = 0 ' Return true if there are no failed prerequisites or the course itself
         End Using
     End Function
+
 
     ' Get the current enrollment count for a specific section
     Public Function GetSectionEnrollmentCount(sectionIdentifier As String) As Integer

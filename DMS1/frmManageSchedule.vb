@@ -139,32 +139,36 @@ Public Class frmManageSchedule
         ' Bind the DataTable to the DataGridView
         DataGridView1.DataSource = dt
     End Sub
-
     ' Add schedule button click
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If cmbUsers.SelectedItem IsNot Nothing AndAlso
        cmbCourses.SelectedItem IsNot Nothing AndAlso
        Not String.IsNullOrEmpty(txtTime.Text) AndAlso
        cmbDays.SelectedItem IsNot Nothing AndAlso
-       cmbRooms.SelectedItem IsNot Nothing AndAlso ' Ensure room is selected
-       cmbSections.SelectedItem IsNot Nothing Then ' Ensure section is selected
+       cmbRooms.SelectedItem IsNot Nothing AndAlso
+       cmbSections.SelectedItem IsNot Nothing Then
 
-            ' Get UserID from ComboBox (this will be either teacher or student)
             Dim selectedUser As Integer = CType(cmbUsers.SelectedItem, ComboBoxItem).Value
             Dim selectedCourse As String = CType(cmbCourses.SelectedItem, ComboBoxItem).Value
-            Dim day As String = cmbDays.SelectedItem.ToString()  ' Use the correct day selection
+            Dim day As String = cmbDays.SelectedItem.ToString()
             Dim time As String = txtTime.Text
-            Dim selectedRoom As String = cmbRooms.SelectedItem.ToString() ' Since you're adding strings now
-            Dim selectedSection As String = CType(cmbSections.SelectedItem, ComboBoxItem).Value ' Get the selected section
+            Dim selectedRoom As String = cmbRooms.SelectedItem.ToString()
+            Dim selectedSection As String = CType(cmbSections.SelectedItem, ComboBoxItem).Value
 
-            ' Call AddSchedule method with the updated UserID
-            scheduleDataAccess.AddSchedule(selectedUser, selectedCourse, day, time, selectedRoom, selectedSection)
-            LoadSchedules()
-            MessageBox.Show("Schedule added successfully.")
+            ' Check for conflicts
+            If scheduleDataAccess.CheckScheduleConflict(day, time, selectedRoom, selectedSection, selectedCourse) Then
+                MessageBox.Show("Conflict detected: Cannot add schedule due to an overlap.", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Else
+                ' Add schedule if no conflict
+                scheduleDataAccess.AddSchedule(selectedUser, selectedCourse, day, time, selectedRoom, selectedSection)
+                LoadSchedules()
+                MessageBox.Show("Schedule added successfully.")
+            End If
         Else
-            MessageBox.Show("Please select a user, course, day, time, and room.")
+            MessageBox.Show("Please fill out all required fields.")
         End If
     End Sub
+
 
     ' Update schedule button click
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click

@@ -150,46 +150,62 @@ Public Class frmEnrollment
     End Sub
 
     Private Sub btnEnrollInCourse_Click(sender As Object, e As EventArgs) Handles btnEnrollInCourse.Click
-        Dim userID As String = txtUserID.Text.Trim() ' Changed from StudentNumber to UserID
+        Dim userID As String = txtUserID.Text.Trim()
         Dim selectedCourse As String = cmbCourses.SelectedItem?.ToString()
         Dim selectedSection As String = cmbSections.SelectedItem?.ToString()
 
-        ' Validate selections specific to the course enrollment
-        If String.IsNullOrWhiteSpace(selectedCourse) OrElse String.IsNullOrWhiteSpace(selectedSection) Then
-            MessageBox.Show("Please fill all fields.")
+        ' Validate user ID
+        If String.IsNullOrWhiteSpace(userID) Then
+            MessageBox.Show("User ID cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Validate course and section selection
+        If String.IsNullOrWhiteSpace(selectedCourse) Then
+            MessageBox.Show("Please select a course.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        If String.IsNullOrWhiteSpace(selectedSection) Then
+            MessageBox.Show("Please select a section.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Dim enrollmentDataAccess As New EnrollmentDataAccess()
-
-        ' Check if the user is already enrolled in the course and section
-        If enrollmentDataAccess.IsUserAlreadyEnrolled(userID, selectedCourse, selectedSection) Then ' Changed from IsStudentAlreadyEnrolled to IsUserAlreadyEnrolled
-            MessageBox.Show("You are already enrolled in this course and section.", "Enrollment Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Check if the user can enroll (prerequisite check)
-        If Not enrollmentDataAccess.IsValidEnrollment(userID, selectedCourse) Then ' Changed from IsValidEnrollment(studentNumber) to IsValidEnrollment(userID)
-            MessageBox.Show("You have failed a prerequisite course for this enrollment.")
-            Return
-        End If
-
-        ' Check if the selected section has space for more students
         Dim sectionDataAccess As New SectionDataAccess()
-        Dim currentEnrollmentCount As Integer = sectionDataAccess.GetCurrentEnrollmentCount(selectedSection)
-        Dim sectionCapacity As Integer = sectionDataAccess.GetSectionCapacity(selectedSection)
 
-        If currentEnrollmentCount < sectionCapacity Then
-            ' Proceed with enrollment
-            enrollmentDataAccess.EnrollUserInCourse(userID, selectedCourse, selectedSection)
-            MessageBox.Show("Successfully enrolled!", "Enrollment Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            ' Check if the user is already enrolled in the course and section
+            If enrollmentDataAccess.IsUserAlreadyEnrolled(userID, selectedCourse, selectedSection) Then
+                MessageBox.Show("You are already enrolled in this course and section.", "Enrollment Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
-            ' Refresh the DataGridView to show the new enrollment for the user
-            LoadEnrollmentData(userID)
-        Else
-            MessageBox.Show("Cannot enroll in this section as it is full.", "Enrollment Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            ' Check prerequisite
+            If Not enrollmentDataAccess.IsValidEnrollment(userID, selectedCourse) Then
+                MessageBox.Show("You have failed a prerequisite course for this enrollment.", "Prerequisite Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' Check section capacity
+            Dim currentEnrollmentCount As Integer = sectionDataAccess.GetCurrentEnrollmentCount(selectedSection)
+            Dim sectionCapacity As Integer = sectionDataAccess.GetSectionCapacity(selectedSection)
+
+            If currentEnrollmentCount < sectionCapacity Then
+                ' Enroll the user
+                enrollmentDataAccess.EnrollUserInCourse(userID, selectedCourse, selectedSection)
+                MessageBox.Show("Successfully enrolled!", "Enrollment Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' Refresh enrollment data
+                LoadEnrollmentData(userID)
+            Else
+                MessageBox.Show("Cannot enroll in this section as it is full.", "Capacity Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"An error occurred during enrollment: {ex.Message}", "Enrollment Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
+
 
     Private Sub btnReEnroll_Click(sender As Object, e As EventArgs) Handles btnReEnroll.Click
         Dim reEnrollForm As New frmReEnroll()
