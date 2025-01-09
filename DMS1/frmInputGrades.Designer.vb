@@ -47,6 +47,7 @@ Partial Class frmInputGrades
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Gold
         Me.Label1.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(458, 170)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(340, 37)
@@ -114,14 +115,19 @@ Partial Class frmInputGrades
         '
         'btnSubmit
         '
-        Me.btnSubmit.BackColor = System.Drawing.Color.Coral
+        Me.btnSubmit.BackColor = System.Drawing.Color.SpringGreen
         Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubmit.ForeColor = System.Drawing.Color.White
+        Me.btnSubmit.Image = Global.DMS1.My.Resources.Resources.icons8_grade_32
+        Me.btnSubmit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubmit.Location = New System.Drawing.Point(533, 560)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(226, 62)
+        Me.btnSubmit.Size = New System.Drawing.Size(216, 62)
         Me.btnSubmit.TabIndex = 5
         Me.btnSubmit.Text = "Submit Grade"
+        Me.btnSubmit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'Panel1

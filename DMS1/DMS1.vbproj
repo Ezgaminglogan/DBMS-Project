@@ -351,5 +351,41 @@
   <ItemGroup>
     <None Include="Resources\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-check-in-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-check-out-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-log-out-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-receipt-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-index-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-grade-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-schedule-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-form-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-load-from-file-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-load-from-file-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-sync-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-delete-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

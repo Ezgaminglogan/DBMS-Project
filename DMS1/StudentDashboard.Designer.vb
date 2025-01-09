@@ -24,13 +24,13 @@ Partial Class StudentDashboard
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(StudentDashboard))
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnEForm = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lblEmail = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnLogout = New System.Windows.Forms.Button()
-        Me.btnStudy = New System.Windows.Forms.Button()
         Me.lblID = New System.Windows.Forms.Label()
+        Me.lblEmail = New System.Windows.Forms.Label()
+        Me.btnLogout = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnStudy = New System.Windows.Forms.Button()
+        Me.btnEForm = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,24 +43,6 @@ Partial Class StudentDashboard
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1183, 729)
         Me.Panel2.TabIndex = 5
-        '
-        'btnEForm
-        '
-        Me.btnEForm.BackColor = System.Drawing.Color.Coral
-        Me.btnEForm.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEForm.FlatAppearance.BorderSize = 0
-        Me.btnEForm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnEForm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.btnEForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEForm.Font = New System.Drawing.Font("Segoe UI Black", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEForm.ForeColor = System.Drawing.Color.Black
-        Me.btnEForm.Location = New System.Drawing.Point(9, 250)
-        Me.btnEForm.Name = "btnEForm"
-        Me.btnEForm.Size = New System.Drawing.Size(149, 52)
-        Me.btnEForm.TabIndex = 1
-        Me.btnEForm.Text = "Enrollment Form"
-        Me.btnEForm.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnEForm.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -77,15 +59,45 @@ Partial Class StudentDashboard
         Me.Panel1.Size = New System.Drawing.Size(167, 729)
         Me.Panel1.TabIndex = 4
         '
+        'lblID
+        '
+        Me.lblID.AutoSize = True
+        Me.lblID.Font = New System.Drawing.Font("Berlin Sans FB", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblID.ForeColor = System.Drawing.Color.White
+        Me.lblID.Location = New System.Drawing.Point(12, 172)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(78, 15)
+        Me.lblID.TabIndex = 11
+        Me.lblID.Text = "[Student's ID]"
+        '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.Font = New System.Drawing.Font("Berlin Sans FB", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.ForeColor = System.Drawing.Color.White
         Me.lblEmail.Location = New System.Drawing.Point(12, 147)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(126, 16)
+        Me.lblEmail.Size = New System.Drawing.Size(99, 15)
         Me.lblEmail.TabIndex = 11
         Me.lblEmail.Text = "[Student's Name]"
+        '
+        'btnLogout
+        '
+        Me.btnLogout.BackColor = System.Drawing.Color.Red
+        Me.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogout.Font = New System.Drawing.Font("Bell MT", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogout.ForeColor = System.Drawing.Color.White
+        Me.btnLogout.Image = Global.DMS1.My.Resources.Resources.icons8_log_out_32
+        Me.btnLogout.Location = New System.Drawing.Point(9, 680)
+        Me.btnLogout.Name = "btnLogout"
+        Me.btnLogout.Size = New System.Drawing.Size(149, 46)
+        Me.btnLogout.TabIndex = 9
+        Me.btnLogout.Text = "Logout"
+        Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnLogout.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -97,51 +109,43 @@ Partial Class StudentDashboard
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
         '
-        'btnLogout
-        '
-        Me.btnLogout.BackColor = System.Drawing.Color.Coral
-        Me.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLogout.FlatAppearance.BorderSize = 0
-        Me.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogout.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogout.ForeColor = System.Drawing.Color.Black
-        Me.btnLogout.Location = New System.Drawing.Point(9, 680)
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(149, 46)
-        Me.btnLogout.TabIndex = 9
-        Me.btnLogout.Text = "Logout"
-        Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnLogout.UseVisualStyleBackColor = False
-        '
         'btnStudy
         '
         Me.btnStudy.BackColor = System.Drawing.Color.Coral
         Me.btnStudy.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnStudy.FlatAppearance.BorderSize = 0
         Me.btnStudy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnStudy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnStudy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnStudy.Font = New System.Drawing.Font("Segoe UI Black", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStudy.ForeColor = System.Drawing.Color.Black
+        Me.btnStudy.Font = New System.Drawing.Font("Berlin Sans FB", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnStudy.ForeColor = System.Drawing.Color.White
+        Me.btnStudy.Image = Global.DMS1.My.Resources.Resources.icons8_load_from_file_32
         Me.btnStudy.Location = New System.Drawing.Point(9, 308)
         Me.btnStudy.Name = "btnStudy"
-        Me.btnStudy.Size = New System.Drawing.Size(149, 46)
+        Me.btnStudy.Size = New System.Drawing.Size(149, 62)
         Me.btnStudy.TabIndex = 7
         Me.btnStudy.Text = "Generate Study Load"
-        Me.btnStudy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnStudy.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnStudy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnStudy.UseVisualStyleBackColor = False
         '
-        'lblID
+        'btnEForm
         '
-        Me.lblID.AutoSize = True
-        Me.lblID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblID.Location = New System.Drawing.Point(12, 172)
-        Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(100, 16)
-        Me.lblID.TabIndex = 11
-        Me.lblID.Text = "[Student's ID]"
+        Me.btnEForm.BackColor = System.Drawing.Color.Coral
+        Me.btnEForm.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEForm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.btnEForm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.btnEForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEForm.Font = New System.Drawing.Font("Berlin Sans FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEForm.ForeColor = System.Drawing.Color.White
+        Me.btnEForm.Image = Global.DMS1.My.Resources.Resources.icons8_form_32
+        Me.btnEForm.Location = New System.Drawing.Point(9, 250)
+        Me.btnEForm.Name = "btnEForm"
+        Me.btnEForm.Size = New System.Drawing.Size(149, 52)
+        Me.btnEForm.TabIndex = 1
+        Me.btnEForm.Text = "Enrollment Form"
+        Me.btnEForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnEForm.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnEForm.UseVisualStyleBackColor = False
         '
         'StudentDashboard
         '

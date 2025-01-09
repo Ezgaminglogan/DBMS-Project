@@ -22,7 +22,7 @@ Partial Class frmEnrollment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEnrollment))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -152,11 +152,15 @@ Partial Class frmEnrollment
         Me.btnEnroll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
         Me.btnEnroll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEnroll.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnroll.ForeColor = System.Drawing.Color.White
+        Me.btnEnroll.Image = Global.DMS1.My.Resources.Resources.icons8_load_from_file_321
+        Me.btnEnroll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEnroll.Location = New System.Drawing.Point(252, 359)
         Me.btnEnroll.Name = "btnEnroll"
         Me.btnEnroll.Size = New System.Drawing.Size(151, 45)
         Me.btnEnroll.TabIndex = 8
         Me.btnEnroll.Text = "ENROLL"
+        Me.btnEnroll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEnroll.UseVisualStyleBackColor = False
         '
         'btnEnrollInCourse
@@ -165,23 +169,32 @@ Partial Class frmEnrollment
         Me.btnEnrollInCourse.BackColor = System.Drawing.Color.Coral
         Me.btnEnrollInCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEnrollInCourse.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnrollInCourse.ForeColor = System.Drawing.Color.White
+        Me.btnEnrollInCourse.Image = Global.DMS1.My.Resources.Resources.icons8_load_from_file_321
+        Me.btnEnrollInCourse.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEnrollInCourse.Location = New System.Drawing.Point(756, 307)
         Me.btnEnrollInCourse.Name = "btnEnrollInCourse"
         Me.btnEnrollInCourse.Size = New System.Drawing.Size(151, 41)
         Me.btnEnrollInCourse.TabIndex = 11
         Me.btnEnrollInCourse.Text = "ENROLL"
+        Me.btnEnrollInCourse.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEnrollInCourse.UseVisualStyleBackColor = False
         '
         'btnReEnroll
         '
         Me.btnReEnroll.BackColor = System.Drawing.Color.Coral
         Me.btnReEnroll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnReEnroll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnReEnroll.Font = New System.Drawing.Font("Segoe UI Black", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReEnroll.Location = New System.Drawing.Point(916, 379)
+        Me.btnReEnroll.ForeColor = System.Drawing.Color.White
+        Me.btnReEnroll.Image = Global.DMS1.My.Resources.Resources.icons8_sync_32
+        Me.btnReEnroll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReEnroll.Location = New System.Drawing.Point(1018, 380)
         Me.btnReEnroll.Name = "btnReEnroll"
-        Me.btnReEnroll.Size = New System.Drawing.Size(120, 40)
+        Me.btnReEnroll.Size = New System.Drawing.Size(141, 40)
         Me.btnReEnroll.TabIndex = 12
         Me.btnReEnroll.Text = "Re-Enroll"
+        Me.btnReEnroll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnReEnroll.UseVisualStyleBackColor = False
         '
         'DataGridView1
@@ -189,14 +202,14 @@ Partial Class frmEnrollment
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Century Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Century Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DataGridView1.Location = New System.Drawing.Point(0, 426)
@@ -210,12 +223,17 @@ Partial Class frmEnrollment
         '
         Me.btnRefresh.AutoSize = True
         Me.btnRefresh.BackColor = System.Drawing.Color.Coral
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.Color.White
+        Me.btnRefresh.Image = Global.DMS1.My.Resources.Resources.icons8_sync_32
+        Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRefresh.Location = New System.Drawing.Point(4, 379)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(105, 30)
+        Me.btnRefresh.Size = New System.Drawing.Size(135, 30)
         Me.btnRefresh.TabIndex = 15
-        Me.btnRefresh.Text = "REFRESH"
+        Me.btnRefresh.Text = "     REFRESH"
+        Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtUserID
         '

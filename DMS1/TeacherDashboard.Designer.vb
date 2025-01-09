@@ -22,9 +22,9 @@ Partial Class TeacherDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TeacherDashboard))
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -32,8 +32,8 @@ Partial Class TeacherDashboard
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dgHourlyData = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnPrintSalary = New System.Windows.Forms.Button()
         Me.lblEmail = New System.Windows.Forms.Label()
+        Me.btnPrintSalary = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnSchedule = New System.Windows.Forms.Button()
@@ -84,14 +84,14 @@ Partial Class TeacherDashboard
         Me.dgSalarySubject.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgSalarySubject.BackgroundColor = System.Drawing.Color.White
         Me.dgSalarySubject.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgSalarySubject.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!)
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgSalarySubject.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
         Me.dgSalarySubject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgSalarySubject.Location = New System.Drawing.Point(6, 24)
         Me.dgSalarySubject.Name = "dgSalarySubject"
@@ -122,27 +122,27 @@ Partial Class TeacherDashboard
         Me.dgHourlyData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgHourlyData.BackgroundColor = System.Drawing.Color.White
         Me.dgHourlyData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgHourlyData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgHourlyData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
         Me.dgHourlyData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgHourlyData.GridColor = System.Drawing.Color.CadetBlue
         Me.dgHourlyData.Location = New System.Drawing.Point(6, 24)
         Me.dgHourlyData.Name = "dgHourlyData"
         Me.dgHourlyData.ReadOnly = True
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgHourlyData.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Lucida Sans Typewriter", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgHourlyData.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.dgHourlyData.Size = New System.Drawing.Size(1171, 336)
         Me.dgHourlyData.TabIndex = 0
         '
@@ -164,20 +164,6 @@ Partial Class TeacherDashboard
         Me.Panel1.Size = New System.Drawing.Size(167, 729)
         Me.Panel1.TabIndex = 4
         '
-        'btnPrintSalary
-        '
-        Me.btnPrintSalary.BackColor = System.Drawing.Color.DarkTurquoise
-        Me.btnPrintSalary.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPrintSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPrintSalary.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrintSalary.ForeColor = System.Drawing.Color.White
-        Me.btnPrintSalary.Location = New System.Drawing.Point(3, 317)
-        Me.btnPrintSalary.Name = "btnPrintSalary"
-        Me.btnPrintSalary.Size = New System.Drawing.Size(160, 32)
-        Me.btnPrintSalary.TabIndex = 12
-        Me.btnPrintSalary.Text = "Print Salary"
-        Me.btnPrintSalary.UseVisualStyleBackColor = False
-        '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
@@ -187,6 +173,22 @@ Partial Class TeacherDashboard
         Me.lblEmail.Size = New System.Drawing.Size(92, 15)
         Me.lblEmail.TabIndex = 11
         Me.lblEmail.Text = "[Teacher Email]"
+        '
+        'btnPrintSalary
+        '
+        Me.btnPrintSalary.BackColor = System.Drawing.Color.DarkTurquoise
+        Me.btnPrintSalary.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPrintSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPrintSalary.Font = New System.Drawing.Font("Berlin Sans FB", 12.0!)
+        Me.btnPrintSalary.ForeColor = System.Drawing.Color.White
+        Me.btnPrintSalary.Image = Global.DMS1.My.Resources.Resources.icons8_receipt_32
+        Me.btnPrintSalary.Location = New System.Drawing.Point(3, 317)
+        Me.btnPrintSalary.Name = "btnPrintSalary"
+        Me.btnPrintSalary.Size = New System.Drawing.Size(160, 49)
+        Me.btnPrintSalary.TabIndex = 12
+        Me.btnPrintSalary.Text = "Print Salary"
+        Me.btnPrintSalary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPrintSalary.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -200,19 +202,21 @@ Partial Class TeacherDashboard
         '
         'btnLogout
         '
-        Me.btnLogout.BackColor = System.Drawing.Color.Coral
+        Me.btnLogout.BackColor = System.Drawing.Color.Red
         Me.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLogout.FlatAppearance.BorderSize = 0
         Me.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogout.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogout.ForeColor = System.Drawing.Color.Black
-        Me.btnLogout.Location = New System.Drawing.Point(3, 676)
+        Me.btnLogout.Font = New System.Drawing.Font("Bell MT", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogout.ForeColor = System.Drawing.Color.White
+        Me.btnLogout.Image = Global.DMS1.My.Resources.Resources.icons8_log_out_32
+        Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnLogout.Location = New System.Drawing.Point(14, 676)
         Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(160, 46)
+        Me.btnLogout.Size = New System.Drawing.Size(139, 46)
         Me.btnLogout.TabIndex = 9
         Me.btnLogout.Text = "Logout"
+        Me.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnLogout.UseVisualStyleBackColor = False
         '
@@ -220,12 +224,12 @@ Partial Class TeacherDashboard
         '
         Me.btnSchedule.BackColor = System.Drawing.Color.Coral
         Me.btnSchedule.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSchedule.FlatAppearance.BorderSize = 0
         Me.btnSchedule.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnSchedule.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSchedule.Font = New System.Drawing.Font("Segoe UI Black", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSchedule.ForeColor = System.Drawing.Color.Black
+        Me.btnSchedule.Font = New System.Drawing.Font("Berlin Sans FB", 12.0!)
+        Me.btnSchedule.ForeColor = System.Drawing.Color.White
+        Me.btnSchedule.Image = Global.DMS1.My.Resources.Resources.icons8_schedule_32
         Me.btnSchedule.Location = New System.Drawing.Point(3, 265)
         Me.btnSchedule.Name = "btnSchedule"
         Me.btnSchedule.Size = New System.Drawing.Size(160, 46)
@@ -238,50 +242,51 @@ Partial Class TeacherDashboard
         '
         Me.btnTimeOut.BackColor = System.Drawing.Color.Crimson
         Me.btnTimeOut.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnTimeOut.FlatAppearance.BorderSize = 0
         Me.btnTimeOut.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnTimeOut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnTimeOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTimeOut.Font = New System.Drawing.Font("Bahnschrift SemiLight Condensed", 14.25!)
         Me.btnTimeOut.ForeColor = System.Drawing.Color.White
-        Me.btnTimeOut.Location = New System.Drawing.Point(3, 619)
+        Me.btnTimeOut.Image = Global.DMS1.My.Resources.Resources.icons8_check_out_32
+        Me.btnTimeOut.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnTimeOut.Location = New System.Drawing.Point(28, 598)
         Me.btnTimeOut.Name = "btnTimeOut"
-        Me.btnTimeOut.Size = New System.Drawing.Size(160, 46)
+        Me.btnTimeOut.Size = New System.Drawing.Size(106, 72)
         Me.btnTimeOut.TabIndex = 3
         Me.btnTimeOut.Text = "Time Out"
-        Me.btnTimeOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnTimeOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnTimeOut.UseVisualStyleBackColor = False
         '
         'btnTimeIn
         '
-        Me.btnTimeIn.BackColor = System.Drawing.Color.Green
+        Me.btnTimeIn.BackColor = System.Drawing.SystemColors.Highlight
         Me.btnTimeIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnTimeIn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnTimeIn.FlatAppearance.BorderSize = 0
         Me.btnTimeIn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnTimeIn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnTimeIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTimeIn.Font = New System.Drawing.Font("Bahnschrift SemiLight Condensed", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnTimeIn.ForeColor = System.Drawing.Color.White
-        Me.btnTimeIn.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.btnTimeIn.Location = New System.Drawing.Point(3, 569)
+        Me.btnTimeIn.Image = Global.DMS1.My.Resources.Resources.icons8_check_in_32
+        Me.btnTimeIn.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnTimeIn.Location = New System.Drawing.Point(28, 520)
         Me.btnTimeIn.Name = "btnTimeIn"
-        Me.btnTimeIn.Size = New System.Drawing.Size(160, 46)
+        Me.btnTimeIn.Size = New System.Drawing.Size(106, 72)
         Me.btnTimeIn.TabIndex = 3
         Me.btnTimeIn.Text = "Time In"
-        Me.btnTimeIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnTimeIn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnTimeIn.UseVisualStyleBackColor = False
         '
         'btnDash
         '
         Me.btnDash.BackColor = System.Drawing.Color.Coral
         Me.btnDash.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnDash.FlatAppearance.BorderSize = 0
         Me.btnDash.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnDash.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnDash.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDash.Font = New System.Drawing.Font("Segoe UI Black", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDash.ForeColor = System.Drawing.Color.Black
+        Me.btnDash.Font = New System.Drawing.Font("Berlin Sans FB", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDash.ForeColor = System.Drawing.Color.White
+        Me.btnDash.Image = Global.DMS1.My.Resources.Resources.icons8_index_32
         Me.btnDash.Location = New System.Drawing.Point(3, 161)
         Me.btnDash.Name = "btnDash"
         Me.btnDash.Size = New System.Drawing.Size(160, 46)
@@ -294,12 +299,12 @@ Partial Class TeacherDashboard
         '
         Me.btnInputGrades.BackColor = System.Drawing.Color.Coral
         Me.btnInputGrades.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnInputGrades.FlatAppearance.BorderSize = 0
         Me.btnInputGrades.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
         Me.btnInputGrades.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
         Me.btnInputGrades.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnInputGrades.Font = New System.Drawing.Font("Segoe UI Black", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInputGrades.ForeColor = System.Drawing.Color.Black
+        Me.btnInputGrades.Font = New System.Drawing.Font("Berlin Sans FB", 12.0!)
+        Me.btnInputGrades.ForeColor = System.Drawing.Color.White
+        Me.btnInputGrades.Image = Global.DMS1.My.Resources.Resources.icons8_grade_32
         Me.btnInputGrades.Location = New System.Drawing.Point(3, 213)
         Me.btnInputGrades.Name = "btnInputGrades"
         Me.btnInputGrades.Size = New System.Drawing.Size(160, 46)

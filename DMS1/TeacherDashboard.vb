@@ -584,4 +584,8 @@ Public Class TeacherDashboard
         End If
 
     End Function
+
+    Private Sub dgHourlyData_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgHourlyData.CellContentClick
+
+    End Sub
 End Class

@@ -27,6 +27,41 @@ DMS1
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:DMS1.My.Resources.Resources.icons8_check_in_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_check_out_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_grade_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_index_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_log_out_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_receipt_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:DMS1.My.Resources.Resources.icons8_schedule_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:DMS1.My.Resources.Resources.images">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
