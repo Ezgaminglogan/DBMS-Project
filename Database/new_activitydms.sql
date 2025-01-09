@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2025 at 12:57 PM
+-- Generation Time: Jan 09, 2025 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,8 +63,8 @@ CREATE TABLE `enrollment` (
 --
 
 INSERT INTO `enrollment` (`EnrollmentID`, `UserID`, `CourseNumber`, `SectionIdentifier`, `EnrollmentDate`) VALUES
-(5, 1337387, 'CC123', 'Section F', '2025-01-04 18:50:31'),
-(6, 1337387, 'CCI122', 'Section F', '2025-01-04 19:15:36');
+(1, 1337387, 'CC123', 'Section F', '2025-01-06 16:47:16'),
+(2, 1337387, 'CCI122', 'Section F', '2025-01-06 16:48:26');
 
 --
 -- Triggers `enrollment`
@@ -105,6 +105,13 @@ CREATE TABLE `gradereport` (
   `CourseNumber` varchar(50) DEFAULT NULL,
   `Grade` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gradereport`
+--
+
+INSERT INTO `gradereport` (`GradeID`, `UserID`, `CourseNumber`, `Grade`) VALUES
+(1, 1337387, 'CC123', 'F');
 
 -- --------------------------------------------------------
 
@@ -156,7 +163,7 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`ScheduleID`, `TeacherID`, `CourseNumber`, `DayOfWeek`, `Time`, `RoomNumber`, `Section`) VALUES
-(1, 2, '1', 'Monday', '4:00 PM-9:00 PM', '301', 'Section F');
+(1, 1337388, 'CC123', 'Thursday', '2:00 PM-7:00 PM', '301', 'Section F');
 
 -- --------------------------------------------------------
 
@@ -175,7 +182,7 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`Section_identifier`, `Course_number`, `Capacity`) VALUES
-('Section F', '3', 4);
+('Section F', '3', 5);
 
 -- --------------------------------------------------------
 
@@ -186,12 +193,21 @@ INSERT INTO `section` (`Section_identifier`, `Course_number`, `Capacity`) VALUES
 CREATE TABLE `teacherlogs` (
   `log_id` int(11) NOT NULL,
   `teacher_ID` int(11) NOT NULL,
-  `Hours` int(11) DEFAULT NULL,
+  `ScheduleID` int(11) DEFAULT NULL,
+  `Hours` decimal(5,2) DEFAULT NULL,
   `Time_In` datetime DEFAULT NULL,
   `Time_Out` datetime DEFAULT NULL,
-  `Salary` decimal(10,0) DEFAULT NULL,
+  `LateHours` decimal(10,2) DEFAULT NULL,
+  `Salary` decimal(10,2) DEFAULT NULL,
   `CreatedAT` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teacherlogs`
+--
+
+INSERT INTO `teacherlogs` (`log_id`, `teacher_ID`, `ScheduleID`, `Hours`, `Time_In`, `Time_Out`, `LateHours`, `Salary`, `CreatedAT`) VALUES
+(1, 1337388, 1, NULL, '2025-01-09 14:18:28', NULL, 0.31, NULL, '2025-01-09 14:18:28');
 
 -- --------------------------------------------------------
 
@@ -216,8 +232,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `Role`, `FirstName`, `LastName`, `Email`, `Password`, `Qualifications`, `CreatedAt`) VALUES
 (1, 'Admin', 'Admin', 'Admin', 'admin@admin.com', '123', NULL, '2025-01-04 09:22:21'),
-(2, 'Teacher', 'Logan', 'Panucat', 'logan.panucat@gmail.com', '123', 'Part Timer', '2025-01-04 09:22:52'),
-(1337387, 'Student', 'Kyle', 'Ragasa', 'kyle@gmail.com', '123', NULL, '2025-01-04 09:23:53');
+(1337387, 'Student', 'Kyle', 'Ragasa', 'kyle@gmail.com', '123', NULL, '2025-01-04 09:23:53'),
+(1337388, 'Teacher', 'Shazad', 'Ricablanca', 'ricablanca@gmail.com', '123', 'Part Timer', '2025-01-09 06:08:40');
 
 --
 -- Indexes for dumped tables
@@ -280,7 +296,8 @@ ALTER TABLE `section`
 --
 ALTER TABLE `teacherlogs`
   ADD PRIMARY KEY (`log_id`),
-  ADD UNIQUE KEY `teacherIDIndex` (`teacher_ID`);
+  ADD UNIQUE KEY `teacherIDIndex` (`teacher_ID`),
+  ADD KEY `fk_teacherlogs_schedule` (`ScheduleID`);
 
 --
 -- Indexes for table `users`
@@ -297,13 +314,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `enrollment`
 --
 ALTER TABLE `enrollment`
-  MODIFY `EnrollmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `EnrollmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `gradereport`
 --
 ALTER TABLE `gradereport`
-  MODIFY `GradeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `GradeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `prerequisite`
@@ -321,13 +338,13 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `teacherlogs`
 --
 ALTER TABLE `teacherlogs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1337388;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1337389;
 
 --
 -- Constraints for dumped tables
@@ -372,6 +389,7 @@ ALTER TABLE `section`
 -- Constraints for table `teacherlogs`
 --
 ALTER TABLE `teacherlogs`
+  ADD CONSTRAINT `fk_teacherlogs_schedule` FOREIGN KEY (`ScheduleID`) REFERENCES `schedule` (`ScheduleID`),
   ADD CONSTRAINT `fk_teacherlogs_teacherID` FOREIGN KEY (`teacher_ID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

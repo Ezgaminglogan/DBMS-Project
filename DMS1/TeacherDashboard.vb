@@ -1,4 +1,6 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Drawing.Printing
+Imports System.Globalization
+Imports MySql.Data.MySqlClient
 
 Public Class TeacherDashboard
     ' This property will be set when the teacher logs in
@@ -74,53 +76,96 @@ Public Class TeacherDashboard
     Private Sub btnTimeIn_Click(sender As Object, e As EventArgs) Handles btnTimeIn.Click
         Dim connectionString As String = "Server=localhost;Database=new_activitydms;Uid=root;Pwd=;"
         Using connection As New MySqlConnection(connectionString)
-            Try
-                connection.Open()
+            connection.Open()
 
-                Dim today As String = DateTime.Now.DayOfWeek.ToString()
+            ' Get today's day of the week
+            Dim today As String = DateTime.Now.DayOfWeek.ToString()
 
-                ' Check if already timed in
-                Dim checkTimeInQuery As String = "SELECT Time_In FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE()"
-                Using checkCommand As New MySqlCommand(checkTimeInQuery, connection)
-                    checkCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                    If checkCommand.ExecuteScalar() IsNot Nothing Then
-                        MessageBox.Show("You have already timed in today.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
-                    End If
-                End Using
+            ' Check if current time falls within any scheduled hours
+            Dim scheduleQuery As String = "
+        SELECT ScheduleID, Time 
+        FROM schedule 
+        WHERE TeacherID = @UserID 
+          AND DayOfWeek = @Today 
+          AND CURTIME() BETWEEN 
+              STR_TO_DATE(SUBSTRING_INDEX(Time, '-', 1), '%l:%i %p') 
+              AND STR_TO_DATE(SUBSTRING_INDEX(Time, '-', -1), '%l:%i %p')"
+            Using scheduleCommand As New MySqlCommand(scheduleQuery, connection)
+                scheduleCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                scheduleCommand.Parameters.AddWithValue("@Today", today)
+                Using reader As MySqlDataReader = scheduleCommand.ExecuteReader()
+                    If reader.Read() Then
+                        Dim scheduleID As Integer = reader.GetInt32("ScheduleID")
+                        Dim scheduleTime As String = reader.GetString("Time")
+                        reader.Close()
 
-                ' Check if current time falls within scheduled hours
-                Dim scheduleQuery As String = "
-                    SELECT ScheduleID 
-                    FROM schedule 
-                    WHERE TeacherID = @UserID 
-                      AND DayOfWeek = @Today 
-                      AND CURTIME() BETWEEN 
-                          STR_TO_DATE(SUBSTRING_INDEX(Time, '-', 1), '%l:%i %p') 
-                          AND STR_TO_DATE(SUBSTRING_INDEX(Time, '-', -1), '%l:%i %p')"
-                Using scheduleCommand As New MySqlCommand(scheduleQuery, connection)
-                    scheduleCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                    scheduleCommand.Parameters.AddWithValue("@Today", today)
-                    If scheduleCommand.ExecuteScalar() Is Nothing Then
+                        ' Check if the teacher has already timed in for this schedule today
+                        Dim checkTimeInQuery As String = "
+                    SELECT log_id 
+                    FROM teacherlogs 
+                    WHERE teacher_ID = @UserID 
+                      AND DATE(Time_In) = CURDATE() 
+                      AND ScheduleID = @ScheduleID 
+                      AND Time_Out IS NULL"
+                        Using checkCommand As New MySqlCommand(checkTimeInQuery, connection)
+                            checkCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                            checkCommand.Parameters.AddWithValue("@ScheduleID", scheduleID)
+                            If checkCommand.ExecuteScalar() IsNot Nothing Then
+                                MessageBox.Show("You have already timed in for this schedule today.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                Exit Sub
+                            End If
+                        End Using
+
+                        ' Calculate late hours
+                        Dim lateHours As Decimal = 0
+                        Dim scheduledStartTime As DateTime
+
+                        ' Fetch the scheduled start time as a string
+                        Dim getScheduledStartTimeQuery As String = "
+                        SELECT STR_TO_DATE(SUBSTRING_INDEX(Time, '-', 1), '%l:%i %p') AS StartTime 
+                        FROM schedule 
+                        WHERE ScheduleID = @ScheduleID"
+                        Using getScheduledStartTimeCommand As New MySqlCommand(getScheduledStartTimeQuery, connection)
+                            getScheduledStartTimeCommand.Parameters.AddWithValue("@ScheduleID", scheduleID)
+                            Dim scheduledStartTimeString As String = getScheduledStartTimeCommand.ExecuteScalar()?.ToString()
+
+                            ' Parse the scheduled start time string into a DateTime object
+                            If Not String.IsNullOrEmpty(scheduledStartTimeString) Then
+                                scheduledStartTime = DateTime.ParseExact(scheduledStartTimeString, "HH:mm:ss", CultureInfo.InvariantCulture)
+                            Else
+                                MessageBox.Show("Failed to retrieve scheduled start time.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                Exit Sub
+                            End If
+                        End Using
+
+                        ' Compare the current time with the scheduled start time
+                        If DateTime.Now > scheduledStartTime Then
+                            lateHours = Math.Round(CDec((DateTime.Now - scheduledStartTime).TotalHours), 2)
+                        End If
+
+                        ' Insert the time in record with the ScheduleID and LateHours
+                        Dim insertQuery As String = "
+                    INSERT INTO teacherlogs (teacher_ID, Time_In, ScheduleID, LateHours) 
+                    VALUES (@UserID, NOW(), @ScheduleID, @LateHours)"
+                        Using insertCommand As New MySqlCommand(insertQuery, connection)
+                            insertCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                            insertCommand.Parameters.AddWithValue("@ScheduleID", scheduleID)
+                            insertCommand.Parameters.AddWithValue("@LateHours", lateHours)
+                            insertCommand.ExecuteNonQuery()
+
+                            MessageBox.Show($"Time In recorded successfully for schedule: {scheduleTime}. Late hours: {lateHours}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End Using
+                    Else
                         MessageBox.Show("You cannot time in outside of your scheduled hours.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
                     End If
                 End Using
-
-                ' Record the time in
-                Dim insertQuery As String = "INSERT INTO teacherlogs (teacher_ID, Time_In) VALUES (@UserID, NOW())"
-                Using insertCommand As New MySqlCommand(insertQuery, connection)
-                    insertCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                    insertCommand.ExecuteNonQuery()
-                    MessageBox.Show("Time In recorded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End Using
-            Catch ex As Exception
-                MessageBox.Show("Error: " & ex.Message)
-            End Try
+            End Using
         End Using
+
+        ' Reload data
         LoadDailyLogs()
         LoadSalarySubject()
-
     End Sub
 
     Private Sub btnTimeOut_Click(sender As Object, e As EventArgs) Handles btnTimeOut.Click
@@ -128,72 +173,115 @@ Public Class TeacherDashboard
         Using connection As New MySqlConnection(connectionString)
             connection.Open()
 
-            ' Check if already timed out
-            Dim checkTimeOutQuery As String = "SELECT Time_Out FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NOT NULL"
-            Using checkCommand As New MySqlCommand(checkTimeOutQuery, connection)
-                checkCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                If checkCommand.ExecuteScalar() IsNot Nothing Then
-                    MessageBox.Show("You have already timed out today.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Exit Sub
-                End If
-            End Using
+            ' Get today's day of the week
+            Dim today As String = DateTime.Now.DayOfWeek.ToString()
 
-            ' Check if timed in for today and retrieve Time_In
-            Dim checkTimeInQuery As String = "SELECT log_id, Time_In FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE() AND Time_Out IS NULL"
-            Using checkTimeInCommand As New MySqlCommand(checkTimeInQuery, connection)
-                checkTimeInCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                Using reader As MySqlDataReader = checkTimeInCommand.ExecuteReader()
+            ' Check if current time falls within any scheduled hours
+            Dim scheduleQuery As String = "
+            SELECT ScheduleID, Time 
+            FROM schedule 
+            WHERE TeacherID = @UserID 
+              AND DayOfWeek = @Today 
+              AND CURTIME() BETWEEN 
+                  STR_TO_DATE(SUBSTRING_INDEX(Time, '-', 1), '%l:%i %p') 
+                  AND STR_TO_DATE(SUBSTRING_INDEX(Time, '-', -1), '%l:%i %p')"
+            Using scheduleCommand As New MySqlCommand(scheduleQuery, connection)
+                scheduleCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                scheduleCommand.Parameters.AddWithValue("@Today", today)
+                Using reader As MySqlDataReader = scheduleCommand.ExecuteReader()
                     If reader.Read() Then
-                        ' Retrieve log_id and Time_In
-                        Dim logId As Integer = reader.GetInt32(reader.GetOrdinal("log_id"))
-                        Dim timeIn As DateTime = reader.GetDateTime(reader.GetOrdinal("Time_In"))
+                        Dim scheduleID As Integer = reader.GetInt32("ScheduleID")
+                        Dim scheduleTime As String = reader.GetString("Time")
                         reader.Close()
-                        ' Get the Qualifications from the users table to determine the hourly rate
-                        Dim getQualificationsQuery As String = "SELECT Qualifications FROM users WHERE UserID = @UserID"
-                        Dim qualifications As String = String.Empty
-                        Using qualificationsCommand As New MySqlCommand(getQualificationsQuery, connection)
-                            qualificationsCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
-                            qualifications = qualificationsCommand.ExecuteScalar()?.ToString()
-                        End Using
 
-                        ' Set the hourly rate based on the qualifications
-                        Dim hourlyRate As Integer
-                        Select Case qualifications
-                            Case "Part Timer"
-                                hourlyRate = 200
-                            Case "Masteral"
-                                hourlyRate = 400
-                            Case "PhD"
-                                hourlyRate = 600
-                            Case "Doctorate"
-                                hourlyRate = 800
-                            Case Else
-                                hourlyRate = 0 ' Handle unexpected or missing qualifications
-                        End Select
+                        ' Check if timed in for this schedule today and retrieve Time_In
+                        Dim checkTimeInQuery As String = "
+                        SELECT log_id, Time_In 
+                        FROM teacherlogs 
+                        WHERE teacher_ID = @UserID 
+                          AND DATE(Time_In) = CURDATE() 
+                          AND ScheduleID = @ScheduleID 
+                          AND Time_Out IS NULL"
+                        Using checkTimeInCommand As New MySqlCommand(checkTimeInQuery, connection)
+                            checkTimeInCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                            checkTimeInCommand.Parameters.AddWithValue("@ScheduleID", scheduleID)
+                            Using reader2 As MySqlDataReader = checkTimeInCommand.ExecuteReader()
+                                If reader2.Read() Then
+                                    ' Retrieve log_id and Time_In
+                                    Dim logId As Integer = reader2.GetInt32("log_id")
+                                    Dim timeIn As DateTime = reader2.GetDateTime("Time_In")
+                                    reader2.Close()
 
-                        ' Calculate Hours Worked
-                        Dim hoursWorked As Decimal = Math.Round(DateTime.Now.Subtract(timeIn).TotalHours, 2)
+                                    ' Get the Qualifications from the users table to determine the hourly rate
+                                    Dim getQualificationsQuery As String = "SELECT Qualifications FROM users WHERE UserID = @UserID"
+                                    Dim qualifications As String = String.Empty
+                                    Using qualificationsCommand As New MySqlCommand(getQualificationsQuery, connection)
+                                        qualificationsCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                                        qualifications = qualificationsCommand.ExecuteScalar()?.ToString()
+                                    End Using
 
-                        ' Calculate Total Salary
-                        Dim totalSalary As Decimal = Math.Round(hoursWorked * hourlyRate, 2)
+                                    ' Set the hourly rate based on the qualifications
+                                    Dim hourlyRate As Decimal
+                                    Select Case qualifications
+                                        Case "Part Timer"
+                                            hourlyRate = 200D
+                                        Case "Masteral"
+                                            hourlyRate = 400D
+                                        Case "PhD"
+                                            hourlyRate = 600D
+                                        Case "Doctorate"
+                                            hourlyRate = 800D
+                                        Case Else
+                                            hourlyRate = 0.0D ' Handle unexpected or missing qualifications
+                                    End Select
 
-                        ' Record the time out and update the hours and salary
-                        Dim updateQuery As String = "
-                        UPDATE teacherlogs 
-                        SET Time_Out = NOW(), 
-                            Hours = @Hours, 
-                            Salary = @Salary 
-                        WHERE log_id = @LogID"
-                        Using updateCommand As New MySqlCommand(updateQuery, connection)
-                            updateCommand.Parameters.AddWithValue("@LogID", logId)
-                            updateCommand.Parameters.AddWithValue("@Hours", hoursWorked)
-                            updateCommand.Parameters.AddWithValue("@Salary", totalSalary)
-                            updateCommand.ExecuteNonQuery()
+                                    ' Calculate Hours Worked (with decimal precision)
+                                    Dim hoursWorked As Decimal = Math.Round(CDec(DateTime.Now.Subtract(timeIn).TotalHours), 2)
 
-                            MessageBox.Show("Time Out recorded successfully. Salary calculated and updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    ' Calculate Late Hours
+                                    Dim lateHours As Decimal = 0
+                                    Dim scheduledStartTime As DateTime
+                                    Dim getScheduledStartTimeQuery As String = "
+                                    SELECT STR_TO_DATE(SUBSTRING_INDEX(Time, '-', 1), '%l:%i %p') AS StartTime 
+                                    FROM schedule 
+                                    WHERE ScheduleID = @ScheduleID"
+                                    Using getScheduledStartTimeCommand As New MySqlCommand(getScheduledStartTimeQuery, connection)
+                                        getScheduledStartTimeCommand.Parameters.AddWithValue("@ScheduleID", scheduleID)
+                                        scheduledStartTime = Convert.ToDateTime(getScheduledStartTimeCommand.ExecuteScalar())
+                                    End Using
+
+                                    If timeIn > scheduledStartTime Then
+                                        lateHours = Math.Round(CDec((timeIn - scheduledStartTime).TotalHours), 2)
+                                    End If
+
+                                    ' Calculate Total Salary (with decimal precision and late hours deduction)
+                                    Dim totalSalary As Decimal = Math.Round((hoursWorked - lateHours) * hourlyRate, 2)
+
+                                    ' Record the time out and update the hours, late hours, and salary
+                                    Dim updateQuery As String = "
+                                UPDATE teacherlogs 
+                                SET Time_Out = NOW(), 
+                                    Hours = @Hours, 
+                                    LateHours = @LateHours, 
+                                    Salary = @Salary 
+                                WHERE log_id = @LogID"
+                                    Using updateCommand As New MySqlCommand(updateQuery, connection)
+                                        updateCommand.Parameters.AddWithValue("@LogID", logId)
+                                        updateCommand.Parameters.AddWithValue("@Hours", hoursWorked)
+                                        updateCommand.Parameters.AddWithValue("@LateHours", lateHours)
+                                        updateCommand.Parameters.AddWithValue("@Salary", totalSalary)
+                                        updateCommand.ExecuteNonQuery()
+
+                                        MessageBox.Show($"Time Out recorded successfully for schedule: {scheduleTime}. Salary calculated and updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    End Using
+                                Else
+                                    MessageBox.Show("You need to time in for this schedule before you can time out.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
+                            End Using
                         End Using
                     Else
-                        MessageBox.Show("You need to time in before you can time out.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        MessageBox.Show("You cannot time out outside of your scheduled hours.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
                     End If
                 End Using
             End Using
@@ -212,13 +300,15 @@ Public Class TeacherDashboard
             Try
                 connection.Open()
 
-                ' Query to fetch logs, hours worked, and the qualification/salary rate
+                ' Query to fetch logs, hours worked, late hours, and the qualification/salary rate
                 Dim query As String = "
             SELECT 
                 log_id AS 'Log ID',
                 Time_In AS 'Time In',
                 Time_Out AS 'Time Out',
+                ScheduleID AS 'Schedule ID',
                 TIMESTAMPDIFF(HOUR, Time_In, Time_Out) AS 'Hours Worked',
+                LateHours AS 'Late Hours',
                 (CASE
                     WHEN qualifications = 'Part Timer' THEN 200
                     WHEN qualifications = 'Masteral' THEN 400
@@ -245,16 +335,21 @@ Public Class TeacherDashboard
                     Dim dataTable As New DataTable()
                     adapter.Fill(dataTable)
 
-                    ' Calculate grand total salary and total hours worked
-                    Dim grandTotalSalary As Integer = 0
-                    Dim totalHours As Integer = 0
+                    ' Calculate grand total salary, total hours worked, and total late hours
+                    Dim grandTotalSalary As Decimal = 0
+                    Dim totalHours As Decimal = 0
+                    Dim totalLateHours As Decimal = 0
                     For Each row As DataRow In dataTable.Rows
                         If Not IsDBNull(row("Total Salary")) Then
-                            grandTotalSalary += Convert.ToInt32(row("Total Salary"))
+                            grandTotalSalary += Convert.ToDecimal(row("Total Salary"))
                         End If
 
                         If Not IsDBNull(row("Hours Worked")) Then
-                            totalHours += Convert.ToInt32(row("Hours Worked"))
+                            totalHours += Convert.ToDecimal(row("Hours Worked"))
+                        End If
+
+                        If Not IsDBNull(row("Late Hours")) Then
+                            totalLateHours += Convert.ToDecimal(row("Late Hours"))
                         End If
                     Next
 
@@ -263,7 +358,9 @@ Public Class TeacherDashboard
                     totalRow("Log ID") = DBNull.Value
                     totalRow("Time In") = DBNull.Value
                     totalRow("Time Out") = DBNull.Value
+                    totalRow("Schedule ID") = DBNull.Value
                     totalRow("Hours Worked") = totalHours
+                    totalRow("Late Hours") = totalLateHours
                     totalRow("Hourly Rate") = DBNull.Value
                     totalRow("Total Salary") = grandTotalSalary
                     dataTable.Rows.Add(totalRow)
@@ -275,7 +372,9 @@ Public Class TeacherDashboard
                     dgHourlyData.Columns("Log ID").HeaderText = "Log Identifier"
                     dgHourlyData.Columns("Time In").HeaderText = "Check-In Time"
                     dgHourlyData.Columns("Time Out").HeaderText = "Check-Out Time"
+                    dgHourlyData.Columns("Schedule ID").HeaderText = "Schedule ID"
                     dgHourlyData.Columns("Hours Worked").HeaderText = "Total Hours"
+                    dgHourlyData.Columns("Late Hours").HeaderText = "Late Hours"
                     dgHourlyData.Columns("Hourly Rate").HeaderText = "Hourly Rate"
                     dgHourlyData.Columns("Total Salary").HeaderText = "Total Salary"
                 End Using
@@ -325,4 +424,164 @@ Public Class TeacherDashboard
         Panel2.Controls.Add(GroupBox1)
         Panel2.Controls.Add(GroupBox2)
     End Sub
+
+    Private Sub btnPrintSalary_Click(sender As Object, e As EventArgs) Handles btnPrintSalary.Click
+        Dim connectionString As String = "Server=localhost;Database=new_activitydms;Uid=root;Pwd=;"
+        Using connection As New MySqlConnection(connectionString)
+            connection.Open()
+
+            ' Fetch the total salary for the day
+            Dim query As String = "SELECT SUM(Salary) AS TotalSalary FROM teacherlogs WHERE teacher_ID = @UserID AND DATE(Time_In) = CURDATE()"
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@UserID", CurrentUserID)
+                Dim result As Object = command.ExecuteScalar()
+                Dim totalSalary As Decimal = If(result Is DBNull.Value, 0D, Convert.ToDecimal(result))
+
+                ' Calculate deductions as percentages
+                Dim taxRate As Decimal = 0.1D ' Example: 10% tax
+                Dim sssRate As Decimal = 0.035D ' Example: 3.5% SSS deduction
+                Dim pagIbigRate As Decimal = 0.02D ' Example: 2% Pag-IBIG deduction
+                Dim philHealthRate As Decimal = 0.015D ' Example: 1.5% PhilHealth deduction
+
+                ' Calculate deductions
+                Dim tax As Decimal = totalSalary * taxRate
+                Dim sssDeduction As Decimal = totalSalary * sssRate
+                Dim pagIbigDeduction As Decimal = totalSalary * pagIbigRate
+                Dim philHealthDeduction As Decimal = totalSalary * philHealthRate
+
+                ' Calculate total deductions
+                Dim totalDeductions As Decimal = tax + sssDeduction + pagIbigDeduction + philHealthDeduction
+
+                ' Ensure total deductions do not exceed total salary
+                If totalDeductions > totalSalary Then
+                    totalDeductions = totalSalary
+                End If
+
+                ' Calculate net salary
+                Dim netSalary As Decimal = totalSalary - totalDeductions
+
+                ' Fetch teacher details
+                Dim teacherQuery As String = "SELECT FirstName, LastName FROM users WHERE UserID = @UserID"
+                Using teacherCommand As New MySqlCommand(teacherQuery, connection)
+                    teacherCommand.Parameters.AddWithValue("@UserID", CurrentUserID)
+                    Using reader As MySqlDataReader = teacherCommand.ExecuteReader()
+                        If reader.Read() Then
+                            Dim firstName As String = reader.GetString("FirstName")
+                            Dim lastName As String = reader.GetString("LastName")
+
+                            ' Create a PrintDocument object
+                            Dim printDoc As New PrintDocument()
+                            AddHandler printDoc.PrintPage, Sub(s, ev)
+                                                               ' Define fonts
+                                                               Dim headerFont As New Font("Arial", 18, FontStyle.Bold)
+                                                               Dim subHeaderFont As New Font("Arial", 14, FontStyle.Bold)
+                                                               Dim contentFont As New Font("Arial", 12)
+                                                               Dim footerFont As New Font("Arial", 10, FontStyle.Italic)
+
+                                                               ' Define margins and starting positions
+                                                               Dim leftMargin As Integer = 50
+                                                               Dim topMargin As Integer = 50
+                                                               Dim lineHeight As Integer = 30
+
+                                                               ' Draw header
+                                                               ev.Graphics.DrawString("SALARY RECEIPT", headerFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight + 10
+
+                                                               ' Draw sub-header (organization name)
+                                                               ev.Graphics.DrawString("XYZ Educational Institution", subHeaderFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight + 10
+
+                                                               ' Draw teacher details
+                                                               ev.Graphics.DrawString($"Teacher: {firstName} {lastName}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"Date: {DateTime.Now.ToShortDateString()}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight + 10
+
+                                                               ' Draw salary details with proper formatting
+                                                               ev.Graphics.DrawString("Salary Details", subHeaderFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"Total Salary: {totalSalary:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"Tax Deducted (10%): {tax:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"SSS Deduction (3.5%): {sssDeduction:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"Pag-IBIG Deduction (2%): {pagIbigDeduction:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"PhilHealth Deduction (1.5%): {philHealthDeduction:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight + 10
+
+                                                               ' Draw total deductions and net salary
+                                                               ev.Graphics.DrawString($"Total Deductions: {totalDeductions:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight
+                                                               ev.Graphics.DrawString($"Net Salary: {netSalary:C2}", contentFont, Brushes.Black, leftMargin, topMargin)
+                                                               topMargin += lineHeight + 10
+
+                                                               ' Draw footer
+                                                               ev.Graphics.DrawString("Thank you for your service!", footerFont, Brushes.Black, leftMargin, topMargin)
+                                                           End Sub
+
+                            ' Show the print dialog
+                            Dim printDialog As New PrintDialog()
+                            printDialog.Document = printDoc
+                            If printDialog.ShowDialog() = DialogResult.OK Then
+                                printDoc.Print() ' Print the document
+                            End If
+                        End If
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    ' Function to calculate SSS deduction
+    Private Function CalculateSSSDeduction(totalSalary As Decimal) As Decimal
+        ' Example SSS calculation (adjust based on actual SSS rules)
+        If totalSalary <= 10000 Then
+            Return 400
+        ElseIf totalSalary <= 20000 Then
+            Return 800
+        Else
+            Return 1200
+        End If
+    End Function
+
+    ' Function to calculate Pag-IBIG deduction
+    Private Function CalculatePagIbigDeduction(totalSalary As Decimal) As Decimal
+        ' Example Pag-IBIG calculation (adjust based on actual Pag-IBIG rules)
+        If totalSalary <= 5000 Then
+            Return 100
+        Else
+            Return 200
+        End If
+    End Function
+
+    ' Function to calculate PhilHealth deduction
+    Private Function CalculatePhilHealthDeduction(totalSalary As Decimal) As Decimal
+        ' Example PhilHealth calculation (adjust based on actual PhilHealth rules)
+        If totalSalary <= 10000 Then
+            Return 300
+        ElseIf totalSalary <= 20000 Then
+            Return 600
+        Else
+            Return 900
+        End If
+    End Function
+    Private Function CalculatePhilippineTax(totalSalary As Decimal) As Decimal
+        ' Philippine Tax Calculation (Simplified)
+        If totalSalary <= 20833 Then
+            Return 0
+        ElseIf totalSalary <= 33333 Then
+            Return (totalSalary - 20833) * 0.2D
+        ElseIf totalSalary <= 66667 Then
+            Return 2500 + (totalSalary - 33333) * 0.25D
+        ElseIf totalSalary <= 166667 Then
+            Return 10833 + (totalSalary - 66667) * 0.3D
+        ElseIf totalSalary <= 666667 Then
+            Return 40833.33 + (totalSalary - 166667) * 0.32D
+        Else
+            Return 200833.33 + (totalSalary - 666667) * 0.35D
+        End If
+
+    End Function
 End Class
